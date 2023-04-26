@@ -5,4 +5,5 @@ export const commonImage = {
 
 export const bgImage = {
   login: require("../assets/img/bg-login.jpg"),
+  subbnr: require("../assets/img/bg-bnr.jpg"),
 };

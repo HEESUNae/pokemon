@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { StyledLoginPage } from "./style";
 
 // components
-import { PrimaryBtn } from "../../components/button/primaryBtn";
+import { PrimaryBtn } from "../../components/button/PrimaryBtn";
 
 // images
 import { commonImage } from "../../consts/image";
