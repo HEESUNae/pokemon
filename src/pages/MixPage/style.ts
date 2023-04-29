@@ -13,7 +13,7 @@ export const StyledMixPage = styled.div`
       gap: 30px;
       img {
         background-color: #eee;
-        width: 130px;
+        width: 158px;
         height: 130px;
         align-items: center;
         justify-content: center;
@@ -40,6 +40,20 @@ export const StyledMixPage = styled.div`
     margin-top: 3vh;
     display: flex;
     padding: 20px;
+    height: 190px;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #aaa;
+      border-radius: 10px;
+      background-clip: padding-box;
+      border: 3px solid transparent;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
   }
 
   .modal-layer {

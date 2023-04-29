@@ -99,6 +99,7 @@ export const MixPage: React.FC = () => {
                 <br />
                 - 한번 합성한 몬스터는 다시 사냥해서 잡아야합니다.
                 <br />- 같은 종류의 몬스터는 합성할 수 없습니다.
+                <br />- 합성한 몬스터가 나올 수도 있습니다.
               </p>
             </div>
           </div>
@@ -112,7 +113,6 @@ export const MixPage: React.FC = () => {
               </div>
             </div>
           ) : null}
-          <div></div>
           <div className="catch-list-container">{catchList.length === 0 ? <ErrorContainer /> : <MixCard searchList={catchList} dropPokemon={dropPokemon} />}</div>
         </div>
       </Layout>
