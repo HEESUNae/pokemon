@@ -3,9 +3,6 @@ import React, { useEffect, useState } from "react";
 // style
 import { StyledMainPage } from "./style";
 
-// image
-import { commonImage } from "../../consts/image";
-
 // libraries
 import { useQuery } from "react-query";
 
@@ -23,6 +20,7 @@ import { Layout } from "../../layout/Layout";
 import { GnbTab } from "../../components/tab/GnbTab";
 import { SearchBar } from "../../components/search/SearchBar";
 import { PokemonCard } from "../../components/card/PokemonCard";
+import { LoadingContainer } from "../../containers/LoadingContainer";
 
 export const MainPage: React.FC = () => {
   const [pokeList, setPokeList] = useState<PokemonsInterface[]>([]);
@@ -62,10 +60,7 @@ export const MainPage: React.FC = () => {
             <PokemonCard searchList={pokeList} />
           </div>
         ) : (
-          <div className="loading">
-            <img src={commonImage.loading} alt="" />
-            <p>로딩중입니다.</p>
-          </div>
+          <LoadingContainer />
         )}
       </Layout>
     </StyledMainPage>
