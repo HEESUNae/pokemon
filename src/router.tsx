@@ -8,7 +8,7 @@ import { MixPage } from "./pages/MixPage";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/pokemon",
     element: <LoginPage />,
   },
   {
