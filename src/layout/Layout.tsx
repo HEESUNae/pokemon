@@ -1,15 +1,14 @@
 import React from "react";
 
+// style
 import { StyledLayout } from "./style";
-
-// layout
-import { Nav } from "../containers/Nav";
 
 export const Layout = ({ children }: React.PropsWithChildren) => {
   return (
-    <>
-      {/* <Nav /> */}
-      <StyledLayout>{children}</StyledLayout>
-    </>
+    <StyledLayout>
+      <div className="mask">
+        <div className="inner">{children}</div>
+      </div>
+    </StyledLayout>
   );
 };

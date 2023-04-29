@@ -11,11 +11,13 @@ export const apiRequest = {
   ability: "ability",
 };
 
+// 포켓몬스터 api
 export const totalPokeApi = async () => {
   const { data } = await axiosApi.get(apiRequest["pokemon"]);
   return data;
 };
 
+// 몬스터 이름 / 이미지 가져오기
 export const PokeListApi = async () => {
   const totalData = await totalPokeApi();
   let list = [];
@@ -33,21 +35,3 @@ export const PokeListApi = async () => {
   }
   return list;
 };
-
-// 몬스터 이름/이미지 가져오기
-// const getTodos = async () => {
-//   const { data } = await axiosApi.get(apiRequest["pokemon"]);
-//   for (const index in data.results) {
-//     const result = await axiosApi.get(apiRequest["pokemon"] + `/${Number(index) + 1}`);
-//     const dataObj: PokemonsInterface[] = [
-//       {
-//         id: result.data.id,
-//         name: result.data.name,
-//         image: result.data.sprites.back_default,
-//         catch: 0,
-//       },
-//     ];
-//     setMonsterArr((prev) => [...prev, ...dataObj]);
-//   }
-//   return pokemonStore;
-// };
