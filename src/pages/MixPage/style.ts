@@ -9,7 +9,7 @@ export const StyledMixPage = styled.div`
   .mix {
     &-container {
       display: flex;
-      /* grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); */
+      margin-top: 30px;
       gap: 30px;
       img {
         background-color: #eee;
