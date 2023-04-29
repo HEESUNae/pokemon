@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 // style
 import { StyledMainPage } from "./style";
 
+// image
+import { commonImage } from "../../consts/image";
+
 // libraries
 import { useQuery } from "react-query";
 
@@ -49,16 +52,21 @@ export const MainPage: React.FC = () => {
     setPokeList(searchMonster);
   }, [pokemonStore, searchValue]);
 
-  if (!isSuccess) return <></>;
-
   return (
     <StyledMainPage>
       <Layout>
-        <div className="main">
-          <SearchBar onChange={getSearchInput} />
-          <GnbTab />
-          <PokemonCard searchList={pokeList} />
-        </div>
+        {isSuccess ? (
+          <div className="main">
+            <SearchBar onChange={getSearchInput} />
+            <GnbTab />
+            <PokemonCard searchList={pokeList} />
+          </div>
+        ) : (
+          <div className="loading">
+            <img src={commonImage.loading} alt="" />
+            <p>로딩중입니다.</p>
+          </div>
+        )}
       </Layout>
     </StyledMainPage>
   );
