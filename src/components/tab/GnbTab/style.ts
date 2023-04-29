@@ -5,7 +5,6 @@ export const StyledGnbTab = styled.div`
     display: flex;
     gap: 10px;
     padding: 20px 0;
-    margin-bottom: 3vh;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     button {

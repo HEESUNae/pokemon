@@ -9,7 +9,7 @@ export const StyledPokemonCard = styled.div`
   .pokemon-card-wrap {
     display: grid;
     gap: 20px;
-    padding-bottom: 60px;
+    padding: 30px 0 60px;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     .pokemon {
       &-card {

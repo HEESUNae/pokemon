@@ -40,7 +40,7 @@ export const StyledMixPage = styled.div`
     margin-top: 3vh;
     display: flex;
     padding: 20px;
-    height: 190px;
+    height: 220px;
     overflow: auto;
     &::-webkit-scrollbar {
       width: 10px;
