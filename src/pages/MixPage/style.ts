@@ -9,8 +9,8 @@ export const StyledMixPage = styled.div`
   .mix {
     &-container {
       display: flex;
-      margin-top: 30px;
-      gap: 30px;
+      margin-top: 3vh;
+      gap: 3vh;
       img {
         background-color: #eee;
         width: 158px;
@@ -37,10 +37,10 @@ export const StyledMixPage = styled.div`
   .catch-list-container {
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 8px;
-    margin-top: 3vh;
+    margin: 3vh 0;
     display: flex;
     padding: 20px;
-    height: 220px;
+    height: 31vh;
     overflow: auto;
     &::-webkit-scrollbar {
       width: 10px;
