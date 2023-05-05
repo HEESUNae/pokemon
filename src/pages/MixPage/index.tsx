@@ -22,7 +22,7 @@ export const MixPage: React.FC = () => {
   const [imgArr, setImgArr] = useState<string[]>([]);
   const [reulstImg, setReulstImg] = useState<string>("");
   const [resultModal, setResultModal] = useState<boolean>(false);
-  const { pokemonStore } = useStore();
+  const { pokemonStore, setPokemonStore, getCatchMonsters } = useStore();
 
   const dropPokemon = (image: string) => {
     if (imgArr.length === 2) return;
@@ -47,37 +47,26 @@ export const MixPage: React.FC = () => {
       setResultModal(true);
 
       for (const i in imgArr) {
-        const test = catchList.filter((el) => {
-          return el.image === imgArr[i];
-        });
-        pokemonStore[test[0].id - 1].catch = 0;
+        const index = pokemonStore.findIndex((item) => item.image === imgArr[i]);
+        pokemonStore[index].catch = 0;
       }
-
       setImgArr([]);
       pokemonStore[pokemonIndex].catch = 1;
-      useStore.setState(() => ({ pokemonStore: pokemonStore }));
-      initCatch();
+      setPokemonStore(pokemonStore);
     }, 1000);
   };
 
-  /**
-   *  잡은 몬스터 리스트 표출
-   */
-  const initCatch = () => {
-    const catchMonstars = pokemonStore.filter((pokemon) => {
-      return pokemon.catch === 1;
-    });
-    setCatchList(catchMonstars);
-  };
-
   useEffect(() => {
-    initCatch();
+    // 가방에 있는 몬스터 가져오기
+    const catchMonstars = getCatchMonsters(pokemonStore);
+    setCatchList(catchMonstars);
 
+    // 합성조건될경우 합성진행
     if (imgArr.length === 2) {
       const randomNum = Math.floor(Math.random() * pokemonStore.length + 1);
       const pokemonIndex = randomNum - 1;
 
-      // 합성결과 포켓몬 store 저장하기
+      // 합성결과 포켓몬 저장하기
       setReulstImg(pokemonStore[pokemonIndex].image);
       // 합성
       excuteMix(pokemonIndex);
@@ -104,7 +93,7 @@ export const MixPage: React.FC = () => {
             </div>
           </div>
 
-          {resultModal ? (
+          {resultModal && (
             <div className="modal-layer">
               <div className="modal">
                 <p>합성결과</p>
@@ -112,8 +101,8 @@ export const MixPage: React.FC = () => {
                 <PrimaryBtn title="확인" onClick={() => setResultModal(false)} />
               </div>
             </div>
-          ) : null}
-          <div className="catch-list-container">{catchList.length === 0 ? <ErrorContainer /> : <MixCard searchList={catchList} dropPokemon={dropPokemon} />}</div>
+          )}
+          <div className="catch-list-container">{catchList.length ? <MixCard searchList={catchList} dropPokemon={dropPokemon} /> : <ErrorContainer />}</div>
         </div>
       </Layout>
     </StyledMixPage>

@@ -4,13 +4,14 @@ import React from "react";
 import { StyledGnbTab } from "./style";
 
 // libraries
-import { Link, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // components
 import { PrimaryBtn } from "../../button/PrimaryBtn";
 
 export const GnbTab: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const currentPath = location.pathname.split("/")[1];
 
   const tabBtnNameObj = [
@@ -28,6 +29,7 @@ export const GnbTab: React.FC = () => {
     },
   ];
 
+  // 현재 선택된 탭 active 추가
   const tabActive = (pathname: string) => {
     if (currentPath === pathname) {
       return "active";
@@ -39,9 +41,9 @@ export const GnbTab: React.FC = () => {
       <div className="gnb-tab">
         {tabBtnNameObj.map((tabname, i) => {
           return (
-            <Link to={"/" + tabname.pathname} key={i}>
+            <div onClick={() => navigate(`/${tabname.pathname}`)} key={i}>
               <PrimaryBtn title={tabname.title} active={tabActive(tabname.pathname)} />
-            </Link>
+            </div>
           );
         })}
       </div>

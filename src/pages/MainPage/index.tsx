@@ -25,13 +25,13 @@ import { LoadingContainer } from "../../containers/LoadingContainer";
 export const MainPage: React.FC = () => {
   const [pokeList, setPokeList] = useState<PokemonsInterface[]>([]);
   const [searchValue, setSearchValue] = useState<string>("");
-  const { pokemonStore } = useStore();
+  const { pokemonStore, setPokemonStore, getSearchMonsters } = useStore();
 
   // 몬스터 이름 / 이미지 가져오기
   const getPokemons = async () => {
     if (pokemonStore.length !== 0) return;
     const result = await PokeListApi();
-    useStore.setState(() => ({ pokemonStore: [...result] }));
+    setPokemonStore([...result]);
     return result;
   };
 
@@ -44,9 +44,7 @@ export const MainPage: React.FC = () => {
 
   // 검색한 몬스터 배열 반환
   useEffect(() => {
-    const searchMonster = pokemonStore.filter((pokemon) => {
-      return pokemon.name.includes(searchValue);
-    });
+    const searchMonster = getSearchMonsters(pokemonStore, searchValue);
     setPokeList(searchMonster);
   }, [pokemonStore, searchValue]);
 
