@@ -21,7 +21,7 @@ import { PokemonCard } from "../../components/card/PokemonCard";
 export const CatchPage: React.FC = () => {
   const [catchList, setCatchList] = useState<PokemonsInterface[]>([]);
   const [searchValue, setSearchValue] = useState<string>("");
-  const { pokemonStore, getCatchMonsters, getSearchMonsters } = useStore();
+  const { pokemonStore, getCatchMonsters } = useStore();
 
   // 사용자 입력값 받기
   const getSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,16 +34,9 @@ export const CatchPage: React.FC = () => {
     setCatchList(catchResult);
   };
 
-  // 검색결과
-  const getSearchResult = () => {
-    const searchMonster = getSearchMonsters(catchList, searchValue);
-    setCatchList(searchMonster);
-  };
-
-  // 검색한 몬스터 배열 반환
   useEffect(() => {
-    searchValue.length ? getSearchResult() : getCatchResult();
-  }, [searchValue]);
+    getCatchResult();
+  }, []);
 
   return (
     <StyledCatchPage>
@@ -51,7 +44,7 @@ export const CatchPage: React.FC = () => {
         <div className="catch">
           <SearchBar onChange={getSearchInput} />
           <GnbTab />
-          {catchList.length ? <PokemonCard searchList={catchList} /> : <ErrorContainer />}
+          {catchList.length ? <PokemonCard listData={catchList} searchValue={searchValue} /> : <ErrorContainer />}
         </div>
       </Layout>
     </StyledCatchPage>

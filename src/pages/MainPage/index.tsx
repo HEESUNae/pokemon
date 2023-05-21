@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 // style
 import { StyledMainPage } from "./style";
@@ -9,12 +9,6 @@ import { useQuery } from "react-query";
 // api
 import { PokeListApi } from "../../api/request";
 
-// store
-import { useStore } from "../../api/store";
-
-// interfaces
-import { PokemonsInterface } from "../../api/interfaces";
-
 // component
 import { Layout } from "../../layout/Layout";
 import { GnbTab } from "../../components/tab/GnbTab";
@@ -23,30 +17,22 @@ import { PokemonCard } from "../../components/card/PokemonCard";
 import { LoadingContainer } from "../../containers/LoadingContainer";
 
 export const MainPage: React.FC = () => {
-  const [pokeList, setPokeList] = useState<PokemonsInterface[]>([]);
   const [searchValue, setSearchValue] = useState<string>("");
-  const { pokemonStore, setPokemonStore, getSearchMonsters } = useStore();
+
+  console.time("test");
 
   // 몬스터 이름 / 이미지 가져오기
   const getPokemons = async () => {
-    if (pokemonStore.length !== 0) return;
-    const result = await PokeListApi();
-    setPokemonStore([...result]);
-    return result;
+    return await PokeListApi();
   };
+  const { isSuccess, data: apiData } = useQuery({ queryKey: ["pokemon"], queryFn: getPokemons, refetchOnWindowFocus: false, refetchOnMount: false });
 
-  const { isSuccess } = useQuery({ queryKey: ["pokemon"], queryFn: getPokemons, refetchOnWindowFocus: false });
+  console.timeEnd("test");
 
   // 사용자 입력값 받기
   const getSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
-
-  // 검색한 몬스터 배열 반환
-  useEffect(() => {
-    const searchMonster = getSearchMonsters(pokemonStore, searchValue);
-    setPokeList(searchMonster);
-  }, [pokemonStore, searchValue]);
 
   return (
     <StyledMainPage>
@@ -55,7 +41,7 @@ export const MainPage: React.FC = () => {
           <div className="main">
             <SearchBar onChange={getSearchInput} />
             <GnbTab />
-            <PokemonCard searchList={pokeList} />
+            <PokemonCard listData={apiData} searchValue={searchValue} />
           </div>
         ) : (
           <LoadingContainer />
